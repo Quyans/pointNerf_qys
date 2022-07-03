@@ -2,9 +2,9 @@
 
 nrCheckpoint="../checkpoints"
 nrDataRoot="../data_src"
-name='horse43/horse43grid_points_Conf_Color_Dir_prune0.5'
+name='horse43/horse43grid_points_Conf_Color_Dir_prune0.9'
 
-resume_iter=2000 # 20000 #latest
+resume_iter=30000 # 20000 #latest
 data_root="${nrDataRoot}/scannet/scans/"
 scan="horse43/horse43grid"
 normview=0

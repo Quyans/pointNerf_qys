@@ -2,9 +2,9 @@
 
 nrCheckpoint="../checkpoints"
 nrDataRoot="../data_src"
-name='guanZi43_3'
+name='guanZi43_prune0.3'
 
-resume_iter=200000 # 20000 #latest
+resume_iter=10000 # 20000 #latest
 data_root="${nrDataRoot}/scannet/scans/"
 scan="guanZi43/guanZi43short"
 normview=0

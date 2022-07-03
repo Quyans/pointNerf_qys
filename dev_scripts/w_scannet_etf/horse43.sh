@@ -2,7 +2,7 @@
 
 nrCheckpoint="../checkpoints"
 nrDataRoot="../data_src"
-name='horse43/horse43grid_points_Conf_Color_Dir_prune0.9'
+name='horse43/horse43grid_points_Conf_Color_Dir_normal'
 
 resume_iter=best # 20000 #latest
 data_root="${nrDataRoot}/scannet/scans/"
@@ -10,13 +10,13 @@ scan="horse43/horse43grid"
 
 load_points=1
 feat_grad=1
-conf_grad=1
-dir_grad=1
-color_grad=1
+conf_grad=0
+dir_grad=0
+color_grad=0
 vox_res=900
 normview=0
-prune_thresh=0.9
-prune_iter=5000
+prune_thresh=0.1
+prune_iter=20000
 
 feedforward=0
 ref_vid=0
@@ -49,7 +49,7 @@ depth_limit_scale=0
 vscale=" 2 2 2 "
 kernel_size=" 3 3 3 "
 query_size=" 3 3 3 "
-vsize=" 0.008 0.008 0.008 " #" 0.005 0.005 0.005 "
+vsize=" 0.005 0.005 0.005 " #" 0.005 0.005 0.005 "
 wcoord_query=1
 z_depth_dim=400
 max_o=610000
@@ -127,7 +127,7 @@ n_threads=2
 
 train_and_test=0 #1
 test_num=10
-test_freq=10000 #  #100 #1200 #1200 #30184 #30184 #50000
+test_freq=20000 #  #100 #1200 #1200 #30184 #30184 #50000
 print_freq=100
 test_num_step=10
 

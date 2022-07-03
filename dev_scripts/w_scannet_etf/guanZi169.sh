@@ -2,7 +2,7 @@
 
 nrCheckpoint="../checkpoints"
 nrDataRoot="../data_src"
-name='guanZi43/guanZi43_Conf_Color_Dir_prune0.5'
+name='guanZi43_prune0.3'
 
 resume_iter=best # 20000 #latest
 data_root="${nrDataRoot}/scannet/scans/"
@@ -15,7 +15,7 @@ dir_grad=1
 color_grad=1
 vox_res=900
 normview=0
-prune_thresh=0.5
+prune_thresh=0.3
 prune_iter=5000
 
 feedforward=0
@@ -117,7 +117,7 @@ gpu_ids='0'
 checkpoints_dir="${nrCheckpoint}/scannet/"
 resume_dir="${nrCheckpoint}/init/dtu_dgt_d012_img0123_conf_agg2_32_dirclr20"
 
-save_iter_freq=2000
+save_iter_freq=5000
 save_point_freq=10000 #301840 #1
 maximum_step=200000 #500000 #250000 #800000
 
