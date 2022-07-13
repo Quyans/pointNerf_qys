@@ -15,9 +15,13 @@ import cv2
 from tqdm import tqdm
 
 class PointCloudEditor:
-    def __init__(self,opt):
-        self.opt = opt
-        pass
+    def __init__(self,opt,modelname=None):
+        if modelname==None:
+           self.opt = opt 
+        else:
+            opt.checkpoints_root = os.path.join(opt.checkpoints_root,modelname)
+            self.opt = opt
+            pass
     def crop_point_cloud(self,npcd_child,npcd_father):# remove npt2 point from npt1,return removed npt1
         '''
         Actually i dont know how to do that...

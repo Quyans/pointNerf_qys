@@ -14,13 +14,23 @@ from tqdm import tqdm
 
 
 class Base_pointcloud:
-    def __init__(self, opt):
-        self.opt = opt
-        self.edit_dir = os.path.join(opt.checkpoints_root, 'edit')
-        if 'edit' not in os.listdir(opt.checkpoints_root):
-            os.makedirs(os.path.join(self.edit_dir))
-        self.xyz = []
-        self.color = []
+    def __init__(self, opt,modelname = None):
+        if modelname==None:
+            self.opt = opt
+            self.edit_dir = os.path.join(opt.checkpoints_root, 'edit')
+            if 'edit' not in os.listdir(opt.checkpoints_root):
+                os.makedirs(os.path.join(self.edit_dir))
+            self.xyz = []
+            self.color = []
+        else:
+            opt.checkpoints_root = os.path.join( opt.checkpoints_root,modelname)
+            self.opt = opt
+            self.edit_dir = os.path.join(opt.checkpoints_root, 'edit')
+            if 'edit' not in os.listdir(opt.checkpoints_root):
+                os.makedirs(os.path.join(self.edit_dir))
+            self.xyz = []
+            self.color = []
+   
     def load_pointcloud(self):
         raise NotImplementedError()
     def save_pointcloud(self):
@@ -29,12 +39,20 @@ class Base_pointcloud:
         return len(self.xyz)
 
 class Neural_pointcloud(Base_pointcloud):
-    def __init__(self,opt):
-        super().__init__(opt)
-        self.embeding = []
-        self.conf = []
-        self.dir = []
-        # self.label = []
+    def __init__(self,opt,modelname = None):
+        if modelname==None:
+            super().__init__(opt)
+            self.embeding = []
+            self.conf = []
+            self.dir = []
+            # self.label = []
+        else:
+            super().__init__(opt,modelname)
+            self.embeding = []
+            self.conf = []
+            self.dir = []
+            # self.label = []
+        
     '''
     checkpoints:从pth网络模型中读取
     ply:读取ply形式的点云信息，完备的
@@ -56,6 +74,7 @@ class Neural_pointcloud(Base_pointcloud):
         # self.label = points_label
     def load_from_ply(self,name='origin'):
         points_path = os.path.join(self.edit_dir,name+'_neuralpcd.ply')
+        print(points_path)
         assert os.path.exists(points_path),'Load file doesn`t exist ,check!'
         print('loading neural point cloud from ply....')
         plydata = PlyData.read(points_path)

@@ -24,11 +24,11 @@ class Options:
         self.parse()
     def parse(self):
         parser = argparse.ArgumentParser(description="Argparse of  point_editor")
-        parser.add_argument('--cra',
+        parser.add_argument('--checkpoints_root',
                             type=str,
                             default='/home/vr717/Documents/qys/code/pointnerf/checkpoints/scannet/swapPoint/horse',#/home/slam/devdata/pointnerf/checkpoints/scannet/scene000-T
                             help='root of checkpoints datasets a')
-        parser.add_argument('--crb',
+        parser.add_argument('--checkpoints_rootb',
                             type=str,
                             default='/home/vr717/Documents/qys/code/pointnerf/checkpoints/scannet/swapPoint/guanZi',#/home/slam/devdata/pointnerf/checkpoints/scannet/scene000-T
                             help='root of checkpoints datasets b')
@@ -38,7 +38,7 @@ class Options:
                             help='gpu ids: e.g. 0  0,1,2, 0,2')
 
         self.opt = parser.parse_args()
-        
+
         # print(self.opt.dataset_dir)
 
 def test_load_checkpoints_save_as_ply(opt,savename):
@@ -126,14 +126,39 @@ def test_edit2(opt):# delete
 def main():
     sparse = Options()
     opt = sparse.opt
+    optb = Options().opt
+    optb.checkpoints_root = opt.checkpoints_rootb
+    print(opt.checkpoints_root)
+    print(optb.checkpoints_root)
+    
+    
+    
     # test_load_checkpoints_save_as_ply(opt,'scene_origin')
     # 测试读ply:这一步中间，用mesh手抠一个物体，命名为sofa_meshlabpcd.ply~！~！~！~！~！~！~！~！
     # test_edit(opt)
     # test_edit1(opt)
     # test_edit2(opt)
     
-    test_load_checkpoints_save_as_ply(opt,"test.ply")
+    # test_load_checkpoints_save_as_ply(opt,"test.ply")
+    
+    for i in range(20):
+        cpc = CheckpointsController(opt)
+        cpcb = CheckpointsController(optb)
+        print(opt.checkpoints_root)
+        print(optb.checkpoints_root)
+        print("要训练：",opt.checkpoints_root)
+        cpc.save_checkpoints_from_neuralpcd_cover_by_b(cpcb.latest_file_path)
+        
+        temp_cp = opt.checkpoints_root;
+        opt.checkpoints_root =  optb.checkpoints_root
+        optb.checkpoints_root = temp_cp
 
+    
+   
+    # b模型
+    print(cpc.latest_file_path)
+    print(cpcb.latest_file_path)
+   
 
 
 if __name__=="__main__":
