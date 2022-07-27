@@ -1,21 +1,12 @@
 #!/bin/bash
 
-# nrCheckpoint="../checkpoints"
-# nrDataRoot="../data_src"
-# name='swapPoint/horse'
-
-# resume_iter=best # 20000 #latest
-# data_root="${nrDataRoot}/scannet/scans/swapData"
-# scan="horse43nogrid"
-
-
-nrCheckpoint="../checkpoints/"
+nrCheckpoint="../checkpoints"
 nrDataRoot="../data_src"
-name='swapPoint/horse'
+name='swapPoint/guanZi'
 
 resume_iter=best # 20000 #latest
-data_root="${nrDataRoot}/scannet/scans/"
-scan="horse43/horse43grid"
+data_root="${nrDataRoot}/scannet/scans/swapData"
+scan="guanZi43short"
 
 
 normview=0

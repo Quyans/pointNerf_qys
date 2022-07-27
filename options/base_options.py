@@ -135,6 +135,14 @@ class BaseOptions:
 
         return parser.parse_args()
 
+    def gather_SceneInd(self):
+        parser = argparse.ArgumentParser(
+            formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+        parser = self.initialize(parser)
+
+        opt, _ = parser.parse_known_args()
+        return parser.parse_args()
+
     def print_and_save_options(self, opt):
         message = ''
         message += '----------------- Options ---------------\n'
@@ -159,6 +167,10 @@ class BaseOptions:
             opt_file.write(message)
             opt_file.write('\n')
 
+    def parse_get_opt(self):
+        # 只取参数 不做操作
+        opt = self.gather_options()
+        return opt
     def parse(self):
         opt = self.gather_options()
         opt.is_train = self.is_train
@@ -167,7 +179,7 @@ class BaseOptions:
             import datetime
             now = datetime.datetime.now().strftime('%y-%m-%d_%H:%M:%S')
             opt.name = opt.name + '_' + now
-
+    
         self.print_and_save_options(opt)
         print("********")
 
@@ -183,3 +195,33 @@ class BaseOptions:
 
         self.opt = opt
         return self.opt
+    
+    def parse_extra(self,extraOptMap):
+        print("parse extraOptMap")
+        opt = self.gather_options()
+        opt.is_train = self.is_train
+
+        if opt.timestamp:
+            import datetime
+            now = datetime.datetime.now().strftime('%y-%m-%d_%H:%M:%S')
+            opt.name = opt.name + '_' + now
+
+        for key in extraOptMap.keys():
+            opt.__setattr__(key,extraOptMap.get(key))
+        
+        self.print_and_save_options(opt)
+        print("********")
+
+        print(type(opt.gpu_ids))
+        print(opt.gpu_ids)
+        
+        str_ids = opt.gpu_ids.split(',')
+        opt.gpu_ids = [
+            int(x) for x in opt.gpu_ids.split(',') if x.strip() and int(x) >= 0
+        ]
+        if len(opt.gpu_ids) > 0:
+            torch.cuda.set_device(0)
+
+        self.opt = opt
+        return self.opt
+

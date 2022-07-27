@@ -203,7 +203,7 @@ def main():
     
     # 测试读ply:这一步中间，用mesh手抠一个物体，命名为sofa_meshlabpcd.ply~！~！~！~！~！~！~！~！
     
-    swapScene2(opt)
+    swapScene(opt)
     # changePose(opt)
     # test_edit(opt)
     # test_edit1(opt)

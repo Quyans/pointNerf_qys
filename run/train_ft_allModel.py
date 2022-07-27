@@ -16,6 +16,7 @@ from pprint import pprint
 from utils.visualizer import Visualizer
 from utils import format as fmt
 from run.evaluate import report_metrics
+
 # from render_vid import render_vid
 torch.manual_seed(0)
 np.random.seed(0)
@@ -581,11 +582,16 @@ def create_all_bg(dataset, model, img_lst, c2ws_lst, w2cs_lst, intrinsics_all, H
 
 import pycuda.driver as cudaa
 
-def main():
-    # print("aaaaa")
+
+
+def main_extra(extraOptMap):
+    print("main_extra")
     torch.backends.cudnn.benchmark = True
     ctx  = cudaa.Device(0).make_context()
-    opt = TrainOptions().parse()
+    
+    # 在parse中进行opt的覆盖
+    opt = TrainOptions().parse_extra(extraOptMap)
+    
     cur_device = torch.device('cuda:{}'.format(opt.gpu_ids[0]) if opt.
                               gpu_ids else torch.device('cpu'))
     print("opt.color_loss_items ", opt.color_loss_items)
@@ -931,7 +937,11 @@ def main():
                 else:
                     visualizer.print_details(
                         'nothing to probe, max ray miss is only {}'.format(model.top_ray_miss_loss[0]))
-
+            # if opt.prob_freq > 0 and real_start != total_steps and total_steps % opt.prob_freq == 0 and total_steps < (opt.maximum_step - 1) and total_steps > 0:
+            if opt.train_step >0 and real_start != total_steps and (total_steps - real_start) % opt.train_step == 0 and total_steps < (opt.maximum_step - 1) and total_steps > 0:
+                print("finish train step, now exit")
+                ctx.pop()
+                exit()
 
             total_steps += 1
             model.set_input(data)
@@ -1088,4 +1098,5 @@ def create_comb_dataset(test_opt, opt, total_steps, prob=None, test_num_step=1):
     return test_dataset
 
 if __name__ == '__main__':
-    main()
+    print("not this file")
+    # main()

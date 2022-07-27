@@ -2,21 +2,21 @@
 
 nrCheckpoint="../checkpoints"
 nrDataRoot="../data_src"
-name='swapPoint/horse'
+name='swapPoint/guanZi'
 
 resume_iter=best # 20000 #latest
 data_root="${nrDataRoot}/scannet/scans/"
-scan="horse43/horse43grid"
+scan="guanZi43/guanZi43short"
 
 load_points=1
-feat_grad=1
+feat_grad=0
 conf_grad=0
 dir_grad=0
-color_grad=0
+color_grad=1
 vox_res=900
 normview=0
-prune_thresh=0.1
-prune_iter=20000
+prune_thresh=0.3
+prune_iter=5000
 
 feedforward=0
 ref_vid=0
@@ -49,7 +49,7 @@ depth_limit_scale=0
 vscale=" 2 2 2 "
 kernel_size=" 3 3 3 "
 query_size=" 3 3 3 "
-vsize=" 0.005 0.005 0.005 " #" 0.005 0.005 0.005 "
+vsize=" 0.008 0.008 0.008 " #" 0.005 0.005 0.005 "
 wcoord_query=1
 z_depth_dim=400
 max_o=610000
@@ -107,7 +107,7 @@ random_sample_size=56 # 32 * 32 = 1024
 batch_size=1
 
 plr=0.002
-lr=0.0005 # 0.0005 #0.00015
+lr=0.00015 # 0.0005 #0.00015
 lr_policy="iter_exponential_decay"
 lr_decay_iters=1000000
 lr_decay_exp=0.1
@@ -117,8 +117,8 @@ gpu_ids='0'
 checkpoints_dir="${nrCheckpoint}/scannet/"
 resume_dir="${nrCheckpoint}/init/dtu_dgt_d012_img0123_conf_agg2_32_dirclr20"
 
-save_iter_freq=1000
-save_point_freq=10000 #301840 #1
+save_iter_freq=50
+save_point_freq=5000 #301840 #1
 maximum_step=200000 #500000 #250000 #800000
 
 niter=10000 #1000000
@@ -127,11 +127,11 @@ n_threads=2
 
 train_and_test=0 #1
 test_num=10
-test_freq=200000 #  #100 #1200 #1200 #30184 #30184 #50000
-print_freq=100
+test_freq=10000000 #  #100 #1200 #1200 #30184 #30184 #50000
+print_freq=50
 test_num_step=10
 
-prob_freq=5000 #10001
+prob_freq=1000000 #10001
 prob_num_step=10
 prob_kernel_size=" 3 3 3 1 1 1 "
 prob_tiers=" 40000 120000 "

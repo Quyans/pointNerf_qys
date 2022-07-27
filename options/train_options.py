@@ -5,7 +5,18 @@ class TrainOptions(BaseOptions):
     def initialize(self, parser):
         parser = BaseOptions.initialize(self, parser)
         self.is_train = True
-
+        
+        parser.add_argument(
+            '--train_step',
+            type=int,
+            default=1000000,
+            help='这次训练多少轮数，(结束轮数-开始训练轮数 = train_step)')
+        
+        parser.add_argument(
+            '--swap_num',
+            type=int,
+            help='训练了多少轮次')
+        
         parser.add_argument(
             '--print_freq',
             type=int,
