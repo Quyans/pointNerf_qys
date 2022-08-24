@@ -1,25 +1,4 @@
-# Point-NeRF: Point-based Neural Radiance Fields (CVPR 2022 Oral 🤩)
-<img src="./images/Adobe-Logos.png" width=120px /><img src="images/USC-Logos.png" width=120px />
 
-[Project Sites](https://xharlie.github.io/projects/project_sites/pointnerf/index.html)
- | [Paper](https://arxiv.org/pdf/2201.08845.pdf) |
-Primary contact: [Qiangeng Xu](https://xharlie.github.io/)
-
-Point-NeRF uses neural 3D point clouds, with associated neural features, to model a radiance field. Point-NeRF can be rendered efficiently by aggregating neural point features near scene surfaces, in a ray marching-based rendering pipeline. Moreover, Point-NeRF can be initialized via direct inference of a pre-trained deep network to produce a neural point cloud; this point cloud can be finetuned to surpass the visual quality of NeRF with 30X faster training time. Point-NeRF can be combined with other 3D reconstruction methods and handles the errors and outliers in such methods via a novel pruning and growing mechanism.
-
-<img src="./images/pipeline.png" />
-
-## Reference
-Please cite our paper if you are interested   
- <strong>Point-NeRF: Point-based Neural Radiance Fields</strong>.  &nbsp;&nbsp;&nbsp; 
-```
-@article{xu2022point,
-  title={Point-NeRF: Point-based Neural Radiance Fields},
-  author={Xu, Qiangeng and Xu, Zexiang and Philip, Julien and Bi, Sai and Shu, Zhixin and Sunkavalli, Kalyan and Neumann, Ulrich},
-  journal={arXiv preprint arXiv:2201.08845},
-  year={2022}
-}
-```
 ## Overal Instruction
 1. Please first install the libraries as below and download/prepare the datasets as instructed.
 2. Point Initialization: Download pre-trained MVSNet as below and train the feature extraction from scratch or directly download the pre-trained models. (Obtain 'MVSNet' and 'init' folder in checkpoints folder)
